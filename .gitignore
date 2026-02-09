@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+edurag-venv/
+edurag-venv-3.12/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Outputs / generated files
+outputs/
+*.json
