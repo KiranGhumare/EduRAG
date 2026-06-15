@@ -1,5 +1,5 @@
 import uuid
-from pathlib import pathlib
+from pathlib import Path
 from typing import Generator
 
 import fitz

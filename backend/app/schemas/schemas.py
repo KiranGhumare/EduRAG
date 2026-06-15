@@ -1,6 +1,7 @@
 from typing import Optional
 from uuid import UUID
 from pydantic import BaseModel
+from datetime import datetime
 
 class CourseCreate(BaseModel):
     name: str 
@@ -52,3 +53,20 @@ class QuestionOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ChatRequest(BaseModel):
+    message: str
+
+class ChatMessageOut(BaseModel):
+    id: UUID
+    role: str
+    content: str
+    message_type: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class ChatResponse(BaseModel):
+    message: ChatMessageOut
+    questions: Optional[list[QuestionOut]] = None

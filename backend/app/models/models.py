@@ -16,6 +16,7 @@ class Course(Base):
     created_at = Column(DateTime, default=datetime.now)
     materials = relationship("Material", back_populates="course", cascade="all, delete-orphan")
     questions = relationship("Question", back_populates="course", cascade="all, delete-orphan")
+    chat_messages = relationship("ChatMessage", back_populates="course", cascade="all, delete-orphan", order_by="ChatMessage.created_at")
 
 class Material(Base):
     __tablename__ = "materials"
@@ -39,7 +40,7 @@ class Question(Base):
     question_type = Column(Text, nullable=False)
     bloom_level = Column(Integer, nullable=False)
     difficulty = Column(String(10), nullable=False)
-    source_material_id = Column(UUID(as_uuid=True), ForeignKey=("materials.id"), nullable=True)
+    source_material_id = Column(UUID(as_uuid=True), ForeignKey("materials.id"), nullable=True)
     source_location = Column(String(100), nullable=False)
     source_excerpt = Column(Text, nullable=True)
 
@@ -51,5 +52,18 @@ class Question(Base):
     explanation = Column(Text, nullable=True)
 
     created_at = Column(DateTime, default = datetime.now)
+    chat_message_id = Column(UUID(as_uuid=True), ForeignKey("chat_messages.id"), nullable=True)
     course = relationship("Course", back_populates="questions")
     material = relationship("Material")
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default =uuid.uuid4)
+    course_id = Column(UUID(as_uuid=True), ForeignKey("courses.id"), nullable=False)
+    role = Column(String(20), nullable=False)
+    content = Column(Text, nullable=False)
+    message_type = Column(String(20), default="text")
+    created_at = Column(DateTime, default=datetime.now)
+
+    course = relationship("Course", back_populates="chat_messages")
