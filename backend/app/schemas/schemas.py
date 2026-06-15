@@ -70,3 +70,25 @@ class ChatMessageOut(BaseModel):
 class ChatResponse(BaseModel):
     message: ChatMessageOut
     questions: Optional[list[QuestionOut]] = None
+
+class LLMQuestionOutput(BaseModel):
+    question_text: str
+    question_type: str
+    bloom_level: int
+    difficulty: str
+    option_a: Optional[str] = None
+    option_b: Optional[str] = None
+    option_c: Optional[str] = None
+    option_d: Optional[str] = None
+    correct_answer: Optional[str] = None
+    explanation: str
+    source_location: str
+    source_excerpt: str
+
+
+class LLMChatOutput(BaseModel):
+    content: str
+    message_type: str
+    source_location: Optional[str] = None
+    source_excerpt: Optional[str] = None
+    questions: Optional[list[LLMQuestionOutput]] = None

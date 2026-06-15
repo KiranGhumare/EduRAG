@@ -54,13 +54,13 @@ def ingest_pdf(
         if not page_text:
             continue
 
-        for chunk_text in chunk_text(page_text):
-            if token_len(chunk_text) < 20:
+        for chunk in chunk_text(page_text):
+            if token_len(chunk) < 20:
                 continue
 
             chunks_to_upsert.append({
                 "id": str(uuid.uuid4()),
-                "text": chunk_text,
+                "text": chunk,
                 "payload": {
                     "material_id": material_id,
                     "course_id": course_id,

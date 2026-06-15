@@ -35,7 +35,7 @@ class VectorStore:
         points = [
             PointStruct(
                 id=chunk["id"],
-                vector=embeddings,
+                vector=embedding,
                 payload={**chunk["payload"], "text": chunk["text"]},
             )
             for chunk, embedding in zip(chunks, embeddings)

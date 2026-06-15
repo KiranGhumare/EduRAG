@@ -52,7 +52,8 @@ def process_material(material_id: str, file_path: str, source_type: str,
         material.status = "ready" if chunk_count > 0 else "no_text_found"
         material.chunk_count = chunk_count
         db.commit()
-    except Exception:
+    except Exception as e:
+        print(f"INGESTION ERROR for material {material_id}: {e}")
         material.status = "error"
         db.commit()
     finally:

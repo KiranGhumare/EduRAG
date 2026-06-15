@@ -64,6 +64,8 @@ class ChatMessage(Base):
     role = Column(String(20), nullable=False)
     content = Column(Text, nullable=False)
     message_type = Column(String(20), default="text")
+    source_location = Column(String(100), nullable=True)
+    source_excerpt = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.now)
 
     course = relationship("Course", back_populates="chat_messages")
