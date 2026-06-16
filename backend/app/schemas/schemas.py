@@ -39,6 +39,7 @@ class GenerateQuestionsRequest(BaseModel):
 class QuestionOut(BaseModel):
     id: UUID
     question_text: str
+    chat_message_id: Optional[UUID] = None
     question_type: str
     bloom_level: int
     difficulty: str
