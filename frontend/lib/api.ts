@@ -90,7 +90,7 @@ export async function getChatHistory(courseId: string): Promise<ChatMessage[]> {
 export async function sendChatMessage(courseId: string, message: string): Promise<ChatResponse> {
   const res = await fetch(`${API_BASE}/courses/${courseId}/chat/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*' },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     body: JSON.stringify({ message }),
   });
   if (!res.ok) throw new Error("Failed to send message");
