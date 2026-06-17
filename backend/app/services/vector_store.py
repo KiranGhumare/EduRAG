@@ -7,7 +7,7 @@ from qdrant_client.models import (
     PointStruct,
     VectorParams,
 )
-
+from qdrant_client.models import PayloadSchemaType
 from app.core.config import settings
 
 EMBEDDING_DIM = 1536
@@ -22,14 +22,34 @@ class VectorStore:
 
     def check_collection(self):
         existing = [c.name for c in self.client.get_collections().collections]
+
         if settings.qdrant_collection not in existing:
             self.client.create_collection(
                 collection_name=settings.qdrant_collection,
-                vectors_config = VectorParams(
-                    size = EMBEDDING_DIM,
-                    distance = Distance.COSINE
+                vectors_config=VectorParams(
+                    size=EMBEDDING_DIM,
+                    distance=Distance.COSINE,
                 ),
             )
+
+        # Ensure indexes exist
+        self.client.create_payload_index(
+            collection_name=settings.qdrant_collection,
+            field_name="course_id",
+            field_schema=PayloadSchemaType.KEYWORD,
+        )
+
+        self.client.create_payload_index(
+            collection_name=settings.qdrant_collection,
+            field_name="material_id",
+            field_schema=PayloadSchemaType.KEYWORD,
+        )
+
+        self.client.create_payload_index(
+            collection_name=settings.qdrant_collection,
+            field_name="source_type",
+            field_schema=PayloadSchemaType.KEYWORD,
+        )
         
     def upsert(self, chunks: list[dict], embeddings: list[list[float]]):
         points = [
