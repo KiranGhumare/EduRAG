@@ -2,8 +2,8 @@
 
 > A conversational AI study assistant — upload your course materials (PDFs, diagrams, lecture recordings) and chat with them. Ask factual questions, generate Bloom's taxonomy-aware exam questions, and get your answers graded, all grounded in your actual course content with citations.
 
-**Live demo:** [your-deployment-url]  
-**Backend API docs:** [your-railway-url]/docs
+**Live demo:** [[your-deployment-url](https://edu-rag-two.vercel.app/)]  
+**Backend API docs:** [[your-railway-url](https://edurag-production-1beb.up.railway.app)]/docs
 
 ---
 
